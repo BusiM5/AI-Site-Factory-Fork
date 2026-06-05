@@ -1,0 +1,18 @@
+{
+  "name": "ai-site-factory-and-outreach-pipeline",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "install:backend": "python -m pip install -r backend/requirements.txt",
+    "install:frontend": "npm install --prefix frontend",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "backend": "python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000 --reload",
+    "frontend": "npm start --prefix frontend",
+    "dev": "concurrently -k -n BACKEND,FRONTEND -c green,blue \"npm run backend\" \"npm run frontend\"",
+    "prepipeline": "npm install && npm run install:all",
+    "pipeline": "npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
