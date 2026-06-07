@@ -40,6 +40,7 @@ app.add_middleware(
 )
 
 
+<<<<<<< HEAD
 INDUSTRY_PRESETS: Dict[str, Dict[str, Any]] = {
     "plumbers": {
         "label": "Plumbers",
@@ -90,6 +91,10 @@ INDUSTRY_PRESETS: Dict[str, Dict[str, Any]] = {
         "services": ["Vehicle servicing", "Diagnostics", "Mechanical repairs"],
     },
 }
+=======
+class ScrapeRequest(BaseModel):
+    url: str
+>>>>>>> 6a495c38f6fc2d2f486f4622a72839cc0923131e
 
 
 class LeadInput(BaseModel):
@@ -122,8 +127,7 @@ class ContentPacket(BaseModel):
     cta: str
     tone: str
     brandNotes: str
-    generatedAt: str
-
+    generatedAt: str  
 
 class IndustryPreset(BaseModel):
     id: str
@@ -761,3 +765,17 @@ def generate_content(cleaned_lead: CleanedLead):
         brandNotes="Generated from cleaned lead data. No unsupported claims added.",
         generatedAt=datetime.now().isoformat(),
     )
+<<<<<<< HEAD
+=======
+@app.post("/api/scrape/lead")
+def scrape_lead(request: ScrapeRequest):
+    return {
+        "businessName": "Demo Business",
+        "email": "info@demobusiness.co.za",
+        "domain": request.url,
+        "category": "General Services",
+        "location": "South Africa",
+        "notes": f"Lead generated from public website source: {request.url}",
+        "sourceType": "scraper-demo"
+    }
+>>>>>>> 6a495c38f6fc2d2f486f4622a72839cc0923131e
